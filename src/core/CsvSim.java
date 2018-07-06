@@ -24,9 +24,9 @@ public class CsvSim {
     public static void runProtocols(){
         HashMap<String, HashMap<String, String>> result = new HashMap<>();
 
-        double[] per = {0.0125,/*0.05, 0.1, 0.125, 0.15*/};
+        double[] per = {0.0125,0.05, 0.1, 0.125, 0.15};
         String[] protocols = {"dtsn", "srwsn", "stdp"};
-        int[] numberofpackets = {/*1000,800,500,250,*/100};
+        int[] numberofpackets = {1000,800,500,250,100};
         for (double p : per) {
             for (String pro : protocols) {
                 for (int pcakets : numberofpackets) {
