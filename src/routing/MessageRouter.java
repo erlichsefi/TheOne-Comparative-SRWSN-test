@@ -11,15 +11,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import core.Application;
-import core.Connection;
-import core.DTNHost;
-import core.Message;
-import core.MessageListener;
-import core.Settings;
-import core.SettingsError;
-import core.SimClock;
-import core.SimError;
+
+import core.*;
 import dtsn.Exception.ScenarioUndefined;
 import report.DtsnAppReporter;
 import routing.util.RoutingInfo;
@@ -28,7 +21,7 @@ import util.Tuple;
 /**
  * Superclass for message routers.
  */
-public abstract class MessageRouter {
+public abstract class MessageRouter extends StopReporter {
 	/** Message buffer size -setting id ({@value}). Long value in bytes.*/
 	public static final String B_SIZE_S = "bufferSize";
 	/**
@@ -166,6 +159,7 @@ public abstract class MessageRouter {
 	 * @param r Router to copy the settings from.
 	 */
 	protected MessageRouter(MessageRouter r) {
+		super(r);
 		this.bufferSize = r.bufferSize;
 		this.msgTtl = r.msgTtl;
 		this.sendQueueMode = r.sendQueueMode;
@@ -372,10 +366,11 @@ public abstract class MessageRouter {
 			// Note that the order of applications is significant
 			// since the next one gets the output of the previous.
 			outgoing = app.handle(outgoing, this.host);
-
+			reportedStop(app);
 			if (outgoing == null) break; // Some app wanted to drop the message
 			if (host.getAddress()==4)
 			app.sendEventToListeners(DtsnAppReporter.PASS, outgoing, host);
+
 
 		}
 

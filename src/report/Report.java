@@ -329,7 +329,7 @@ public abstract class Report {
 	 * premature termination or intervalled report generating decided
 	 * that it's time for the next report.
 	 */
-	public void done() {
+	public void done(String... parm) {
 		if (out != null) {
 			out.close();
 		}

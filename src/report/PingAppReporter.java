@@ -21,10 +21,10 @@ public class PingAppReporter extends Report implements ApplicationListener {
 	private int pingsSent=0, pingsReceived=0;
 	private int pongsSent=0, pongsReceived=0;
 
-	public void gotEvent(String event, Object params, Application app,
+	public boolean gotEvent(String event, Object params, Application app,
 			DTNHost host) {
 		// Check that the event is sent by correct application type
-		if (!(app instanceof PingApplication)) return;
+		if (!(app instanceof PingApplication)) return false;
 
 		// Increment the counters based on the event type
 		if (event.equalsIgnoreCase("GotPing")) {
@@ -39,12 +39,12 @@ public class PingAppReporter extends Report implements ApplicationListener {
 		if (event.equalsIgnoreCase("SentPing")) {
 			pingsSent++;
 		}
-
+	return false;
 	}
 
 
 	@Override
-	public void done() {
+	public void done(String...parm) {
 		write("Ping stats for scenario " + getScenarioName() +
 				"\nsim_time: " + format(getSimTime()));
 		double pingProb = 0; // ping probability
@@ -71,6 +71,6 @@ public class PingAppReporter extends Report implements ApplicationListener {
 			;
 
 		write(statsText);
-		super.done();
+		super.done(parm);
 	}
 }

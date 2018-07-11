@@ -14,7 +14,7 @@ public class DTNSimTextUI extends DTNSimUI {
 	private long startTime; // simulation start time
 	/** How often the UI view is updated (milliseconds) */
 	public static final long UI_UP_INTERVAL = 60000;
-
+	public static double expird_time=0;
 	protected void runSim() {
 		double simTime = SimClock.getTime();
 		double endTime = scen.getEndTime();
@@ -37,7 +37,10 @@ public class DTNSimTextUI extends DTNSimUI {
 		}
 
 		double duration = (System.currentTimeMillis() - startTime)/1000.0;
-
+		if (!simCancelled) {
+			System.out.println("sim time as expird by " + (simTime - endTime));
+			expird_time=endTime;
+		}
 		simDone = true;
 		done();
 		this.update(true); // force final UI update

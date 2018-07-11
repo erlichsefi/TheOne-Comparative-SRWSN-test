@@ -17,7 +17,7 @@ import java.util.Random;
  * World contains all the nodes and is responsible for updating their
  * location and connections.
  */
-public class World {
+public class World extends StopReporter {
 	/** name space of optimization settings ({@value})*/
 	public static final String OPTIMIZATION_SETTINGS_NS = "Optimization";
 
@@ -196,12 +196,17 @@ public class World {
 					break;
 				}
 				this.updateOrder.get(i).update(simulateConnections);
+				reportedStop(updateOrder.get(i));
+
 			}
 		}
-
+		if (wasreported()) {
+			isCancelled=true;
+		}
 		if (simulateConOnce && simulateConnections) {
 			simulateConnections = false;
 		}
+
 	}
 
 	/**

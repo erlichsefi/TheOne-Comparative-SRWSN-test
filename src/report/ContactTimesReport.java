@@ -106,7 +106,7 @@ public class ContactTimesReport extends Report implements ConnectionListener {
 	}
 
 	@Override
-	public void done() {
+	public void done(String... parm) {
 
 		for (int i=0, n=this.nrofContacts.size(); i<n; i++) {
 			Integer contacts = nrofContacts.get(i);
@@ -117,7 +117,7 @@ public class ContactTimesReport extends Report implements ConnectionListener {
 			write((i*this.granularity) + " " + contacts);
 		}
 
-		super.done();
+		super.done(parm);
 	}
 
 

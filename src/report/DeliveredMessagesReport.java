@@ -73,7 +73,7 @@ public class DeliveredMessagesReport extends Report implements MessageListener {
 	public void messageTransferStarted(Message m, DTNHost from, DTNHost to) {}
 
 	@Override
-	public void done() {
-		super.done();
+	public void done(String... parm) {
+		super.done(parm);
 	}
 }

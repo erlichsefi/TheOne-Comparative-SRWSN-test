@@ -2,7 +2,6 @@ package dtsn;
 
 
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import core.Application;
@@ -92,7 +91,7 @@ public class DtsnDestention extends DtsnApplication{
 					SendNewAck(sessionId, Values.NUMBER_OF_PACKETS_TO_SEND, this.Sourcehost, host);
 				}
 				else{
-					super.sendEventToListeners(DtsnAppReporter.ERROR, null, host);
+					super.sendEventToListeners(DtsnAppReporter.TimerPop, LastActivity.length(), host);
 					System.err.println("activity timer poped and packets= "+ Arrays.toString(ReceptionBuffer.getMissingPackets(1,Values.NUMBER_OF_PACKETS_TO_SEND)));
 					super.sendEventToListeners("Sesssion deleted", null, host);
 				}

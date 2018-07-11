@@ -18,7 +18,7 @@ import static core.Constants.DEBUG;
 /**
  * A DTN capable host.
  */
-public class DTNHost implements Comparable<DTNHost> {
+public class DTNHost extends StopReporter implements Comparable<DTNHost>  {
 	private static int nextAddress = 0;
 	private int address;
 
@@ -344,6 +344,9 @@ public class DTNHost implements Comparable<DTNHost> {
 			}
 		}
 		this.router.update();
+		reportedStop(router);
+
+
 	}
 
 	/**
@@ -479,6 +482,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public void messageTransferred(String id, DTNHost from) {
 		this.router.messageTransferred(id, from);
+		reportedStop(router);
 	}
 
 	/**

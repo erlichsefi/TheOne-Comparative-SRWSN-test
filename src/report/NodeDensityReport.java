@@ -142,7 +142,7 @@ extends SamplingReport {
 	// Report
 	//========================================================================//
 	@Override
-	public void done() {
+	public void done(String... parm) {
 
 		if (this.gnuplot) {
 			this.outputGnuplotPrefix();
@@ -168,7 +168,7 @@ extends SamplingReport {
 			this.outputGnuplotSuffix(this.samples.size());
 		}
 
-		super.done();
+		super.done(parm);
 	}
 	//========================================================================//
 

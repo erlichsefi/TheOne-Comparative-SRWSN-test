@@ -49,8 +49,8 @@ public class MessageReport extends Report implements MessageListener {
 	}
 
 	@Override
-	public void done() {
-		super.done();
+	public void done(String...parm) {
+		super.done(parm);
 	}
 
 	// nothing to implement for the rest

@@ -136,7 +136,7 @@ public class MessageStatsReport extends Report implements MessageListener {
 
 
 	@Override
-	public void done() {
+	public void done(String...parm) {
 		write("Message stats for scenario " + getScenarioName() +
 				"\nsim_time: " + format(getSimTime()));
 		double deliveryProb = 0; // delivery probability
@@ -176,7 +176,7 @@ public class MessageStatsReport extends Report implements MessageListener {
 			;
 
 		write(statsText);
-		super.done();
+		super.done(parm);
 	}
 
 }

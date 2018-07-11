@@ -91,7 +91,7 @@ public class ContactsDuringAnICTReport extends Report
 	}
 
 	@Override
-	public void done() {
+	public void done(String... parm) {
 		Integer[] contacts = (Integer[])contactsDuringIC.toArray(new Integer[0]);
 		Arrays.sort(contacts);
 
@@ -110,6 +110,6 @@ public class ContactsDuringAnICTReport extends Report
 				count = 0;
 			}
 		}
-		super.done();
+		super.done(parm);
 	}
 }

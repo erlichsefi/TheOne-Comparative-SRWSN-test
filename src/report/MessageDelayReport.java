@@ -56,7 +56,7 @@ public class MessageDelayReport extends Report implements MessageListener {
 	}
 
 	@Override
-	public void done() {
+	public void done(String...parm) {
 		if (delays.size() == 0) {
 			write("# no messages delivered in sim time "+format(getSimTime()));
 			super.done();
@@ -70,7 +70,7 @@ public class MessageDelayReport extends Report implements MessageListener {
 			cumProb += 1.0/nrofCreated;
 			write(format(delays.get(i)) + " " + format(cumProb));
 		}
-		super.done();
+		super.done(parm);
 	}
 
 	// nothing to implement for the rest

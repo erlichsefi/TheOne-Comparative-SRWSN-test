@@ -74,6 +74,9 @@ public abstract class DTNSimUI {
 		this.simCancelled = false;
 	}
 
+	public void CancelSim(){
+		simCancelled=true;
+	}
 	/**
 	 * Starts the simulation.
 	 */

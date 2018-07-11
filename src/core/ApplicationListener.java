@@ -29,7 +29,8 @@ public interface ApplicationListener {
 	 * @param params	Additional parameters for the event
 	 * @param app		Application instance that generated the event.
 	 * @param host		The host this application instance is running on.
+	 * @return true if to stop the sim from running
 	 */
-	public void gotEvent(String event, Object params, Application app,
+	public boolean gotEvent(String event, Object params, Application app,
 			DTNHost host);
 }

@@ -42,7 +42,7 @@ public class EncountersVSUniqueEncountersReport extends Report
 	}
 
 	@Override
-	public void done() {
+	public void done(String... parm) {
 		int[] totalEncounters = totalEncountersReport.getEncounters();
 		int[][] nodeRelationships = uniqueEncountersReport.getNodeRelationships();
 
@@ -61,6 +61,6 @@ public class EncountersVSUniqueEncountersReport extends Report
 			write(row);
 		}
 
-		super.done();
+		super.done(parm);
 	}
 }

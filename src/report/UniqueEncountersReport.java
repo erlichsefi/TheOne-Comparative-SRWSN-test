@@ -42,7 +42,7 @@ public class UniqueEncountersReport extends Report implements
 	}
 
 	@Override
-	public void done() {
+	public void done(String...parm) {
 		int[] distribution = new int[1000];
 		
 		if (nodeRelationships == null) {
@@ -67,7 +67,7 @@ public class UniqueEncountersReport extends Report implements
 			write(i + " " + distribution[i]);
 		}
 
-		super.done();
+		super.done(parm);
 	}
 
 	public int[][] getNodeRelationships() {

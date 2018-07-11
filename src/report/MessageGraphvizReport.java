@@ -52,7 +52,7 @@ public class MessageGraphvizReport extends Report implements MessageListener {
 	public void messageTransferStarted(Message m, DTNHost from, DTNHost to) {}
 
 	@Override
-	public void done() {
+	public void done(String... parm) {
 		write("/* scenario " + getScenarioName() + "\n" +
 				deliveredMessages.size() + " messages delivered at " +
 				"sim time " + getSimTime() + " */") ;
@@ -73,7 +73,7 @@ public class MessageGraphvizReport extends Report implements MessageListener {
 		setPrefix(""); // don't indent anymore
 		write("}");
 
-		super.done();
+		super.done(parm);
 	}
 
 }

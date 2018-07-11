@@ -41,7 +41,7 @@ public class TotalEncountersReport extends Report implements ConnectionListener,
 	}
 
 	@Override
-	public void done() {
+	public void done(String...parm) {
 
 		int maxEncounters = -1;
 		for (int i=0; i<encounters.length; i++) {
@@ -61,7 +61,7 @@ public class TotalEncountersReport extends Report implements ConnectionListener,
 			write(i + " " + distribution[i]);
 		}
 
-		super.done();
+		super.done(parm);
 	}
 
 	public int[] getEncounters() {

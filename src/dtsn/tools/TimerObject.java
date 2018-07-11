@@ -40,4 +40,7 @@ public class TimerObject {
 		return hostThatInvokeTimer;
 	}
 
+    public long length() {
+		return TimeToWait;
+    }
 }

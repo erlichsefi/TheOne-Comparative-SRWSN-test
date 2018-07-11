@@ -15,7 +15,6 @@ import core.*;
 import dtsn.DtsnApplication;
 import dtsn.Values;
 import dtsn.tools.DtsnMessage;
-import ui.DTNSimUI;
 
 /**
  * Reporter for the <code>PingApplication</code>. Counts the number of pings
@@ -36,9 +35,9 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 	public static final  String PASS="pass";
 	public static  final String SEND="send";
 	public static  final String RECIVE="recive";
-	public static final String ERROR = "error ";
-	public  boolean finishedOK = false;
-
+	public static final String TimerPop = "error ";
+	public boolean finishedOK = false;
+	public boolean canBeStoped=false;
 	String protocol=null;
 
 	HashMap<Integer,site> sites=new HashMap<Integer,site>();
@@ -51,10 +50,10 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 	}
 
 
-	public void gotEvent(String event, Object params, Application app,
+	public boolean gotEvent(String event, Object params, Application app,
 			DTNHost host) {
 		// Check that the event is sent by correct application type
-		if (!(app instanceof DtsnApplication)) return;
+		if (!(app instanceof DtsnApplication)) return false;
 
 
 
@@ -64,14 +63,16 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 		else if (event.equals(ENDTIME)){
 			endtime=System.currentTimeMillis();
 			done();
-			System.out.println("Sim Ended!");
+ 			System.out.println("Sim Ended!");
 			//System.exit(-1);
+			return true;
 		}
-		else if (event.equals(ERROR)){
+		else if (event.equals(TimerPop)){
 			endtime=System.currentTimeMillis();
 			write("E-R-R-O-R");
 			done();
 			System.out.println("Sim Crashed! ");
+			return true;
 
 		}
 
@@ -113,12 +114,13 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 		else{
 			status.add(event);
 		}
+		return  false;
 	}
 
 
 
 	@Override
-	public void done() {
+	public void done(String ... parm) {
 		write("run values:");
 		write(Values.getString());
 		write(" ******************* ");
@@ -170,9 +172,10 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 		write("time= "+(this.endtime-this.starttime));
 		output.put("time",this.endtime-this.starttime+"");
 
-		super.done();
+		super.done(parm);
 		if (finishedOK) {
 			CsvSim.cuurnet = output;
+			CsvSim.timerpop= parm.clone();
 		}
 	}
 

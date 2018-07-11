@@ -34,7 +34,7 @@ import java.util.List;
  * @author mjpitka
  * @author teemuk
  */
-public abstract class Application {
+public abstract class Application extends StopReporter{
 
 	private List<ApplicationListener> aListeners = null;
 
@@ -50,6 +50,7 @@ public abstract class Application {
 	 * @param app
 	 */
 	public Application(Application app){
+		super(app);
 		this.aListeners = app.getAppListeners();
 		this.appID = app.appID;
 	}
@@ -123,7 +124,10 @@ public abstract class Application {
 	public void sendEventToListeners(String event, Object params,
 			DTNHost host) {
 		for (ApplicationListener al : this.aListeners) {
-			al.gotEvent(event, params, this, host);
+			if (al.gotEvent(event, params, this, host)){
+				stopWasReported=true;
+			}
+
 		}
 	}
 	
