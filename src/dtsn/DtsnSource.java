@@ -1,6 +1,8 @@
 package dtsn;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -11,6 +13,7 @@ import core.SimClock;
 import dtsn.Exception.ScenarioUndefined;
 import dtsn.tools.Buffer;
 import dtsn.tools.DtsnMessage;
+import dtsn.tools.Stat;
 import dtsn.tools.TimerObject;
 import report.DtsnAppReporter;
 
@@ -162,6 +165,8 @@ public class DtsnSource extends DtsnApplication {
 	@Override
 	public void update(DTNHost host) {
 		if (CanStartSendingData()){
+			Stat.SOURCE_BEFFER=this.OutputBuffer.minimal();
+
 			//check ear timer
 			if (EarTimer!=null && EarTimer.Expired()){
 				EARTimerExpird(host);
@@ -208,9 +213,11 @@ public class DtsnSource extends DtsnApplication {
 	protected Message OnReciveControlMessage(DtsnMessage m,DTNHost host){
 		super.sendEventToListeners(DtsnAppReporter.RECIVE, m, host);
 		if (m.IsACK_BIT()){
+			Stat.last_ack=m.getConfiramtionSeq();
 			return OnAckReceived(m.getConfiramtionSeq(),m,host);
 		}
 		else if (m.IsNACK_BIT()){
+			Stat.last_nack=m.getMissingPackets();
 			return OnNackReceived(m,m.getMissingPackets(),host);
 		}
 		else{
@@ -375,8 +382,9 @@ public class DtsnSource extends DtsnApplication {
 	}
 
 	private void StartNewEARtimer(long mili,final DTNHost host){
-		if (EarTimer!=null)
+		if (EarTimer!=null) {
 			EarTimer.disable();
+		}
 		EarTimer=new TimerObject(mili,null,host);
 
 	}

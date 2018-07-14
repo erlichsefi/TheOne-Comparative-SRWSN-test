@@ -12,7 +12,9 @@ public class SortedList {
 	}
 	
 	public void add(DtsnMessage m){
-		ReceptionBuffer.add(m);
+		if (!ReceptionBuffer.contains(m)) {
+			ReceptionBuffer.add(m);
+		}
 		Collections.sort(ReceptionBuffer);
 	}
 	

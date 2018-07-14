@@ -44,7 +44,7 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 	ArrayList<String> status=new ArrayList<String>();
 	long starttime;
 	long endtime;
-
+	String gma="";
 	public DtsnAppReporter(){
 
 	}
@@ -89,8 +89,13 @@ public class DtsnAppReporter extends Report implements ApplicationListener {
 			}
 			status.add(event);
 		}
-
-	//	System.out.println(SimClock.getTime()+" "+host+" "+event+" [ "+m+" ]");
+//		if (host!=null && host.toString().contains("d2")){
+//			if (gma=="send" && m.IsACK_BIT()) {
+//				System.out.println(event + "-> " + m);
+//			}
+//			gma=event;
+//		}
+		write(SimClock.getTime()+" "+host+" "+event+" [ "+m+" ]");
 		if (m!=null){
 			int hostid=host.getAddress();
 			int numberofbyte=m.getSize();

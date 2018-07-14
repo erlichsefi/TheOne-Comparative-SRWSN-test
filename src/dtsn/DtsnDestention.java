@@ -2,6 +2,7 @@ package dtsn;
 
 
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import core.Application;
@@ -9,6 +10,7 @@ import core.DTNHost;
 import core.Message;
 import dtsn.tools.DtsnMessage;
 import dtsn.tools.SortedList;
+import dtsn.tools.Stat;
 import dtsn.tools.TimerObject;
 import report.DtsnAppReporter;
 
@@ -70,10 +72,13 @@ public class DtsnDestention extends DtsnApplication{
 
 	@Override
 	public Message handle(Message m, DTNHost host) {
+		String[] s= ReceptionBuffer.getMissingPackets(1,Values.NUMBER_OF_PACKETS_TO_SEND);
+		Stat.DEST_MINIMAL_MISSING=s!=null && s.length>0? s[0] : ""+Values.NUMBER_OF_PACKETS_TO_SEND+1;
 		if (m.getDest()!=host.getAddress()){
 			return m;
 		}
 		if (!SessionEnded){
+			//System.out.println(m);
 			return OnReciveMessage(m,host);
 		}
 		return null;
@@ -158,16 +163,18 @@ public class DtsnDestention extends DtsnApplication{
 	/**
 	 * if no send ack
 	 * if yes send nack
-	 * @param m
+	 * @param
 	 */
 	protected void OnEarDelivered(int last,DTNHost host) {
 		String[] missing=ReceptionBuffer.getMissingPackets(1,last);
 
-
+		//System.out.println("dest sent missing are: "+ Arrays.toString(missing));
 		// Ack or Nack
 		if (missing.length>0){
 			SendNewNAck(missing,sessionId,Sourcehost, host);
-		//	LastConfirm=Integer.parseInt(missing[0]);
+			//System.out.println("dest sent"+ Arrays.toString(missing));
+
+			//	LastConfirm=Integer.parseInt(missing[0]);
 		}
 		else{
 			SendNewAck(sessionId,last,Sourcehost,host);

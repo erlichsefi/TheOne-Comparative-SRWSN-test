@@ -1,0 +1,6 @@
+dtsn&1000,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.0125,null,null,null,null,null,null,null,null;sim_time100000.0,
+0.05,null,null,null,null,null,null,null,null;sim_time100000.0,
+0.1,null,null,null,null,null,null,null,null;sim_time100000.0,
+0.125,null,null,null,null,null,null,null,null;sim_time100000.0,
+0.15,null,null,null,null,null,null,null,null;sim_time100000.0,

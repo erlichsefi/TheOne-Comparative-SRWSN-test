@@ -22,6 +22,10 @@ public class Buffer{
 
 	}
 
+	public int minimal(){
+		return array[0]!=null ? array[0].SeqNum: -1;
+	}
+
 	public boolean add(DtsnMessage m){
 		if (index<size){
 			array[index++]=m;

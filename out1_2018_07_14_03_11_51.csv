@@ -1,0 +1,12 @@
+dtsn&1000,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.0,71652,594252,1596330,7560,16332,15969,369316,[];sim_time100000.0,
+
+
+srwsn&1000,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.0,187663,1415740,1377078,3488,3039,9567,35606,[];sim_time100000.0,
+
+
+stdp&1000,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.0,759546,1214622,1604434,1932,402,8525,63242,[];sim_time100000.0,
+
+

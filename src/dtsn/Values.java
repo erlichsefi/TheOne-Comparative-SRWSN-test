@@ -5,14 +5,14 @@ public class Values {
 	public static  int STWSN_NUM_OF_MERKLE_TREE = 1;
 	public static  double LOST_EVERY_N_PACKET = 1-0.01;
 	public static  int NUMBER_OF_PACKETS_TO_SEND = 100;
-	public static int Source_BUFFER_SIZE = 12;
+	public static int Source_BUFFER_SIZE = 30;
 	public static  int MAX_NUM_OF_EAR = 15;
 
 	
-	public static  long DTSN_SOURCE_INIT_ESTIMITED_RRT_VARIANCE = 1000;
-	public static  long DTSN_SOURCE_INIT_ESTIMITED_RTT_VALUE = 1000;
-	public static  double DTSN_SOURCE_ALPA = 0.5;
-	public static  double DTSN_SOURCE_BETA = 0.5;
+	public static  long DTSN_SOURCE_INIT_ESTIMITED_RRT_VARIANCE = 500;
+	public static  long DTSN_SOURCE_INIT_ESTIMITED_RTT_VALUE = 500;
+	public static  double DTSN_SOURCE_ALPA = 0.9;
+	public static  double DTSN_SOURCE_BETA = 0.8;
 	
 	public static  byte[] SDTP_ACK_MASTER_KEY=new byte[128];
 	public static  byte[] SDTP_NACK_MASTER_KEY=new byte[128];
