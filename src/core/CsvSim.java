@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,10 +20,67 @@ public class CsvSim {
     public static  HashMap<String, String> cuurnet = null;
     public static Object[] timerpop=null;
     static int attemptLimit=1;
+    static ArrayList<String> ignore_list=new ArrayList<>();
     public static void main(String[] args) {
         //runTrees();
         runProtocols();
     }
+
+    public static void build_ignore(){
+        ignore_list.add(key("dtsn",0.00625,800));
+        ignore_list.add(key("dtsn",0.0125,800));
+        ignore_list.add(key("dtsn",0.025,800));
+
+        ignore_list.add(key("dtsn",0.0125,500));
+
+        ignore_list.add(key("dtsn",0.0125,250));
+        ignore_list.add(key("dtsn",0.025,250));
+
+        ignore_list.add(key("dtsn",0.00625,100));
+
+        ignore_list.add(key("srwsn",0.00625,1000));
+        ignore_list.add(key("srwsn",0.025,1000));
+        ignore_list.add(key("srwsn",0.05,1000));
+        ignore_list.add(key("srwsn",0.05,800));
+
+        ignore_list.add(key("srwsn",0.00625,500));
+        ignore_list.add(key("srwsn",0.0125,500));
+        ignore_list.add(key("srwsn",0.05,500));
+
+        ignore_list.add(key("srwsn",0.00625,250));
+        ignore_list.add(key("srwsn",0.0125,250));
+        ignore_list.add(key("srwsn",0.05,250));
+        ignore_list.add(key("srwsn",0.1,250));
+
+        ignore_list.add(key("srwsn",0.00625,100));
+        ignore_list.add(key("srwsn",0.0125,100));
+        ignore_list.add(key("srwsn",0.05,100));
+
+
+        ignore_list.add(key("stdp",0.00625,1000));
+        ignore_list.add(key("stdp",0.05,1000));
+
+        ignore_list.add(key("stdp",0.00625,800));
+
+        ignore_list.add(key("stdp",0.00625,500));
+        ignore_list.add(key("stdp",0.025,500));
+
+        ignore_list.add(key("stdp",0.00625,250));
+        ignore_list.add(key("stdp",0.0125,250));
+        ignore_list.add(key("stdp",0.05,250));
+
+
+
+        ignore_list.add(key("stdp",0.00625,100));
+        ignore_list.add(key("stdp",0.0125,100));
+        ignore_list.add(key("stdp",0.05,100));
+
+    }
+
+    public static String key(String protocol,double per,int packets){
+        return  protocol+per+packets;
+    }
+
 
     public static void runProtocols(){
         SimpleDateFormat dt1 = new SimpleDateFormat("_yyyy_MM_dd_hh_mm_ss");
@@ -38,34 +96,38 @@ public class CsvSim {
                     writer.write(pro+"&"+pcakets+",ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm");
                     writer.write("\r\n");
                     for (double p : per) {
-                        Values.LOST_EVERY_N_PACKET = 1 - p;
-                        Values.NUMBER_OF_PACKETS_TO_SEND = pcakets;
-                        DtsnOneToEachMessageGenerator.APP_ID = pro;
-                        int attempt=0;
-                        while (attempt<attemptLimit && cuurnet == null) {
-                            try {
-                                Thread.sleep(10000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println(attempt+"/"+attemptLimit+" of Protocol="+pro+" per= "+p+" number of packets= "+pcakets);
-                            DTNSim.initSettings(new String[]{null}, 1);
-                            Settings.setRunIndex(0);
-                            DTNSim.resetForNextRun();
-                            new DTNSimTextUI().start();
-                            attempt++;
+                        if (!ignore_list.contains(key(pro,p,pcakets))) {
+                            Values.LOST_EVERY_N_PACKET = 1 - p;
+                            Values.NUMBER_OF_PACKETS_TO_SEND = pcakets;
+                            DtsnOneToEachMessageGenerator.APP_ID = pro;
+                            int attempt = 0;
+                            while (attempt < attemptLimit && cuurnet == null) {
+                                try {
+                                    Thread.sleep(10000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                System.out.println(attempt + "/" + attemptLimit + " of Protocol=" + pro + " per= " + p + " number of packets= " + pcakets);
+                                DTNSim.initSettings(new String[]{null}, 1);
+                                Settings.setRunIndex(0);
+                                DTNSim.resetForNextRun();
+                                new DTNSimTextUI().start();
+                                attempt++;
 
-                        }
-                        if (cuurnet==null){
-                            writeOneresult(writer,new HashMap<>(),p+"");
-                            System.err.println("------> simultion faild");
+                            }
+                            if (cuurnet == null) {
+                                writeOneresult(writer, new HashMap<>(), p + "");
+                                System.err.println("------> simultion faild");
+                            } else {
+                                writeOneresult(writer, cuurnet, p + "");
+                                System.err.println("------> simultion good");
+
+                            }
                         }
                         else{
-                            writeOneresult(writer,cuurnet,p+"");
-                            System.err.println("------> simultion good");
+                            writeOneresult(writer, new HashMap<>(), p + "");
 
                         }
-
                         writer.flush();
                         cuurnet = null;
                         timerpop=null;

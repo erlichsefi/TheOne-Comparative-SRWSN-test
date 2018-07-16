@@ -42,7 +42,7 @@ Group.nrofInterfaces = 1
 Group.LinearMovement.initLocType=0
 Group.LinearMovement.targetType=5	
 Group.movementModel = LinearMovement
-Group.waitTime = 0,120
+#Group.waitTime = 0,0
 # Walking speeds
 
 # Message TTL of 300 minutes (5 hours)
