@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62526b33-75e5-4da7-932b-dffadebb7c23" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/default_settings.txt" afterPath="$PROJECT_DIR$/default_settings.txt" />
-      <change beforePath="$PROJECT_DIR$/src/core/CsvSim.java" afterPath="$PROJECT_DIR$/src/core/CsvSim.java" />
-    </list>
+    <list default="true" id="62526b33-75e5-4da7-932b-dffadebb7c23" name="Default" comment="" />
     <ignored path="the-one-master.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -628,12 +624,12 @@
       <workItem from="1531320725587" duration="1782000" />
       <workItem from="1531561230518" duration="9465000" />
       <workItem from="1531578877091" duration="1150000" />
-      <workItem from="1531728516031" duration="1062000" />
+      <workItem from="1531728516031" duration="1127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119991000" />
+    <option name="totallyTimeSpent" value="120056000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-18" y="-18" width="3876" height="2076" extended-state="6" />
