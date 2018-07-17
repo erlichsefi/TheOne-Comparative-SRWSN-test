@@ -23,6 +23,7 @@ public class CsvSim {
     static ArrayList<String> ignore_list=new ArrayList<>();
     public static void main(String[] args) {
         //runTrees();
+        build_ignore();
         runProtocols();
     }
 
@@ -114,9 +115,9 @@ public class CsvSim {
         try {
             writer = new FileWriter("out1"+dt1.format(new Date())+".csv");
 
-            double[] per = {0.00625,0.0125,0.025,0.05,0.1};
-            String[] protocols = {"dtsn", "srwsn", "stdp"};
-            int[] numberofpackets = {1000,800,500,250,100};
+            double[] per = {/*0.00625,0.0125,*/0.025/*,0.05,0.1*/};
+            String[] protocols = {"dtsn"/*, "srwsn", "stdp"*/};
+            int[] numberofpackets = {/*1000,*/800,500,250,100};
             for (String pro : protocols) {
                 for (int pcakets : numberofpackets) {
                     writer.write(pro+"&"+pcakets+",ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm");

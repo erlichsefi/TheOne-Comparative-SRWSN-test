@@ -1,0 +1,8 @@
+dtsn&800,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.025,null,null,null,null,null,null,null,null;sim_time0.0,
+
+dtsn&500,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.025,null,null,null,null,null,null,null,null;sim_time0.0,
+
+dtsn&250,ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm
+0.025,null,null,null,null,null,null,null,null;sim_time0.0,
