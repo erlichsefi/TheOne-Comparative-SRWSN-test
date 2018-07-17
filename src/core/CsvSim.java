@@ -27,20 +27,29 @@ public class CsvSim {
     }
 
     public static void build_ignore(){
+        ignore_list.add(key("dtsn",0.025,1000));
+
+
         ignore_list.add(key("dtsn",0.00625,800));
         ignore_list.add(key("dtsn",0.0125,800));
         ignore_list.add(key("dtsn",0.025,800));
 
+        ignore_list.add(key("dtsn",0.00625,500));
         ignore_list.add(key("dtsn",0.0125,500));
+        ignore_list.add(key("dtsn",0.025,500));
 
+        ignore_list.add(key("dtsn",0.00625,250));
         ignore_list.add(key("dtsn",0.0125,250));
         ignore_list.add(key("dtsn",0.025,250));
 
         ignore_list.add(key("dtsn",0.00625,100));
 
+        ////////////////////////
+
         ignore_list.add(key("srwsn",0.00625,1000));
         ignore_list.add(key("srwsn",0.025,1000));
         ignore_list.add(key("srwsn",0.05,1000));
+
         ignore_list.add(key("srwsn",0.05,800));
 
         ignore_list.add(key("srwsn",0.00625,500));
@@ -49,21 +58,30 @@ public class CsvSim {
 
         ignore_list.add(key("srwsn",0.00625,250));
         ignore_list.add(key("srwsn",0.0125,250));
+        ignore_list.add(key("srwsn",0.025,250));
         ignore_list.add(key("srwsn",0.05,250));
         ignore_list.add(key("srwsn",0.1,250));
 
         ignore_list.add(key("srwsn",0.00625,100));
         ignore_list.add(key("srwsn",0.0125,100));
+        ignore_list.add(key("srwsn",0.025,100));
         ignore_list.add(key("srwsn",0.05,100));
 
 
+        ///
+
         ignore_list.add(key("stdp",0.00625,1000));
+        ignore_list.add(key("stdp",0.0125,1000));
         ignore_list.add(key("stdp",0.05,1000));
+
 
         ignore_list.add(key("stdp",0.00625,800));
 
         ignore_list.add(key("stdp",0.00625,500));
         ignore_list.add(key("stdp",0.025,500));
+        ignore_list.add(key("stdp",0.0125,500));
+        ignore_list.add(key("stdp",0.05,500));
+
 
         ignore_list.add(key("stdp",0.00625,250));
         ignore_list.add(key("stdp",0.0125,250));
@@ -74,6 +92,8 @@ public class CsvSim {
         ignore_list.add(key("stdp",0.00625,100));
         ignore_list.add(key("stdp",0.0125,100));
         ignore_list.add(key("stdp",0.05,100));
+        ignore_list.add(key("stdp",0.025,100));
+
 
     }
 
@@ -88,12 +108,7 @@ public class CsvSim {
         try {
             writer = new FileWriter("out1"+dt1.format(new Date())+".csv");
 
-            double[] per = {0.00625
-                    ,0.0125
-                    ,0.025
-                    ,0.05
-                    ,0.1
-            };
+            double[] per = {0.00625,0.0125,0.025,0.05,0.1};
             String[] protocols = {"dtsn", "srwsn", "stdp"};
             int[] numberofpackets = {1000,800,500,250,100};
             for (String pro : protocols) {
