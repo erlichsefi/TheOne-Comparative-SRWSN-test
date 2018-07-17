@@ -54,7 +54,9 @@ public class CsvSim {
 
         ignore_list.add(key("srwsn",0.00625,500));
         ignore_list.add(key("srwsn",0.0125,500));
+        ignore_list.add(key("srwsn",0.025,500));
         ignore_list.add(key("srwsn",0.05,500));
+
 
         ignore_list.add(key("srwsn",0.00625,250));
         ignore_list.add(key("srwsn",0.0125,250));
@@ -66,15 +68,18 @@ public class CsvSim {
         ignore_list.add(key("srwsn",0.0125,100));
         ignore_list.add(key("srwsn",0.025,100));
         ignore_list.add(key("srwsn",0.05,100));
+        ignore_list.add(key("srwsn",0.1,250));
 
 
         ///
 
         ignore_list.add(key("stdp",0.00625,1000));
         ignore_list.add(key("stdp",0.0125,1000));
+        ignore_list.add(key("stdp",0.025,1000));
         ignore_list.add(key("stdp",0.05,1000));
 
 
+        ignore_list.add(key("stdp",0.05,800));
         ignore_list.add(key("stdp",0.00625,800));
 
         ignore_list.add(key("stdp",0.00625,500));
@@ -85,6 +90,7 @@ public class CsvSim {
 
         ignore_list.add(key("stdp",0.00625,250));
         ignore_list.add(key("stdp",0.0125,250));
+        ignore_list.add(key("stdp",0.025,250));
         ignore_list.add(key("stdp",0.05,250));
 
 
@@ -145,6 +151,7 @@ public class CsvSim {
                             }
                         }
                         else{
+                            System.out.println("ignoreing= "+key(pro,p,pcakets));
                             writeOneresult(writer, new HashMap<>(), p + "");
 
                         }
