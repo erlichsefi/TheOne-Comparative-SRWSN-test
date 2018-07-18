@@ -44,14 +44,20 @@ public class CsvSim {
         ignore_list.add(key("dtsn",0.025,250));
 
         ignore_list.add(key("dtsn",0.00625,100));
+        ignore_list.add(key("dtsn",0.0125,100));
+        ignore_list.add(key("dtsn",0.025,100));
+
 
         ////////////////////////
 
         ignore_list.add(key("srwsn",0.00625,1000));
         ignore_list.add(key("srwsn",0.025,1000));
         ignore_list.add(key("srwsn",0.05,1000));
+        ignore_list.add(key("srwsn",0.0125,1000));
 
         ignore_list.add(key("srwsn",0.05,800));
+        ignore_list.add(key("srwsn",0.0125,800));
+
 
         ignore_list.add(key("srwsn",0.00625,500));
         ignore_list.add(key("srwsn",0.0125,500));
@@ -82,6 +88,8 @@ public class CsvSim {
 
         ignore_list.add(key("stdp",0.05,800));
         ignore_list.add(key("stdp",0.00625,800));
+        ignore_list.add(key("stdp",0.0125,800));
+
 
         ignore_list.add(key("stdp",0.00625,500));
         ignore_list.add(key("stdp",0.025,500));
