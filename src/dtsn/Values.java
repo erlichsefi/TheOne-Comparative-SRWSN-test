@@ -2,8 +2,14 @@ package dtsn;
 
 
 public class Values {
+	public enum attackerType{
+		on,off,both,none
+	}
+	public static  attackerType ATTACKER_TYPE = attackerType.on;
+
 	public static  int STWSN_NUM_OF_MERKLE_TREE = 1;
 	public static  double LOST_EVERY_N_PACKET = 1-0.01;
+	public static double ATTACK_PROB=1-0.1;
 	public static  int NUMBER_OF_PACKETS_TO_SEND = 100;
 	public static int Source_BUFFER_SIZE = 30;
 	public static  int MAX_NUM_OF_EAR = 15;
@@ -47,5 +53,6 @@ public class Values {
 				+ SRWSN_MAX_OPEN_SESSION_TO_SEND + ", SRWSN_TIME_TO_AGGREGATE_CPNTROL="
 				+ SRWSN_TIME_TO_AGGREGATE_CPNTROL + "]";
 	}
+
 
 }

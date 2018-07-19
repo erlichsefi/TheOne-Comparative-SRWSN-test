@@ -23,8 +23,8 @@ public class CsvSim {
     static ArrayList<String> ignore_list=new ArrayList<>();
     public static void main(String[] args) {
         //runTrees();
-        build_ignore();
-        runProtocols();
+      //  build_ignore();
+        runAttacker();
     }
 
     public static void build_ignore(){
@@ -123,9 +123,9 @@ public class CsvSim {
         try {
             writer = new FileWriter("out1"+dt1.format(new Date())+".csv");
 
-            double[] per = {0.00625,0.0125,0.025,0.05,0.1};
-            String[] protocols = {"dtsn", "srwsn", "stdp"};
-            int[] numberofpackets = {1000,800,500,250,100};
+            double[] per = {0.05};//{0.00625,0.0125,0.025,0.05,0.1};
+            String[] protocols ={"stdp"};// {"dtsn", "srwsn", "stdp"};
+            int[] numberofpackets = {100};//{1000,800,500,250,100};
             for (String pro : protocols) {
                 for (int pcakets : numberofpackets) {
                     writer.write(pro+"&"+pcakets+",ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm");
@@ -138,7 +138,82 @@ public class CsvSim {
                             int attempt = 0;
                             while (attempt < attemptLimit && cuurnet == null) {
                                 try {
-                                    Thread.sleep(10000);
+                                    Thread.sleep(1);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                System.out.println(attempt + "/" + attemptLimit + " of Protocol=" + pro + " per= " + p + " number of packets= " + pcakets);
+                                DTNSim.initSettings(new String[]{null}, 1);
+                                Settings.setRunIndex(0);
+                                DTNSim.resetForNextRun();
+                                new DTNSimTextUI().start();
+                                attempt++;
+
+                            }
+                            if (cuurnet == null) {
+                                writeOneresult(writer, new HashMap<>(), p + "");
+                                System.err.println("------> simultion faild");
+                            } else {
+                                writeOneresult(writer, cuurnet, p + "");
+                                System.err.println("------> simultion good");
+
+                            }
+                        }
+                        else{
+                            System.out.println("ignoreing= "+key(pro,p,pcakets));
+                            writeOneresult(writer, new HashMap<>(), p + "");
+
+                        }
+                        writer.flush();
+                        cuurnet = null;
+                        timerpop=null;
+                    }
+                    writer.write("\r\n");
+                }
+                writer.write("\r\n");
+
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (writer!=null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+    }
+
+
+    public static void runAttacker(){
+        SimpleDateFormat dt1 = new SimpleDateFormat("_yyyy_MM_dd_hh_mm_ss");
+        FileWriter writer=null;
+        Values.ATTACKER_TYPE = Values.attackerType.both;
+
+        try {
+            writer = new FileWriter("attacker_"+Values.ATTACKER_TYPE+"_"+dt1.format(new Date())+".csv");
+            double[] per = {0,0.2,0.4,0.6,0.8};
+            String[] protocols ={"dtsn", "srwsn", "stdp"};
+            int[] numberofpackets = {600};//{1000,800,500,250,100};
+            for (String pro : protocols) {
+                for (int pcakets : numberofpackets) {
+                    writer.write(pro+"&"+pcakets+",ack_size_sum,nack_size_sum,data_size_sum,ack_size_count,nack_size_count,data_size_count,time,extra_parm");
+                    writer.write("\r\n");
+                    for (double p : per) {
+                        if (!ignore_list.contains(key(pro,p,pcakets))) {
+                            Values.LOST_EVERY_N_PACKET=1;
+                            Values.ATTACK_PROB = 1 - p;
+                            Values.NUMBER_OF_PACKETS_TO_SEND = pcakets;
+                            DtsnOneToEachMessageGenerator.APP_ID = pro;
+                            int attempt = 0;
+                            while (attempt < attemptLimit && cuurnet == null) {
+                                try {
+                                    Thread.sleep(1);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }

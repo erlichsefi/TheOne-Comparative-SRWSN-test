@@ -37,7 +37,9 @@ public class DtsnMidRouter extends ActiveRouter {
 	public static final String MSG_COUNT_PROPERTY = SPRAYANDWAIT_NS + "." +
 			"copies";
 	Random r=new Random(1);
+	Random attack_r=new Random(1);
 	double LostProb=Values.LOST_EVERY_N_PACKET;
+	double atteckerProb=Values.ATTACK_PROB;
 	protected int initialNrofCopies;
 	protected boolean isBinary;
 	int[] count=new int[3];
@@ -62,6 +64,10 @@ public class DtsnMidRouter extends ActiveRouter {
 		this.count=r.count;
 		this.initialNrofCopies = r.initialNrofCopies;
 		this.isBinary = r.isBinary;
+		this.atteckerProb=r.atteckerProb;
+		this.attack_r=r.attack_r;
+		this.LostProb=r.LostProb;
+		this.r=r.r;
 	}
 
 	@Override
@@ -113,8 +119,28 @@ public class DtsnMidRouter extends ActiveRouter {
 		double P=r.nextDouble();
 		if (P>LostProb){
 			count[0]++;
-			//System.err.println("!"+m);
 		}else{
+			switch (Values.ATTACKER_TYPE){
+				case on:
+					if ( !((DtsnMessage)m).IsPiggayBagBit() && attack_r.nextDouble()>atteckerProb){
+						((DtsnMessage)m).setPiggayBagBit();
+					//	System.out.println("TURNING ON");
+					}
+				case off:
+					if (((DtsnMessage)m).IsPiggayBagBit() && attack_r.nextDouble()>atteckerProb){
+						((DtsnMessage)m).flipPiggayBagBit();
+					//	System.out.println("TURNING OFF");
+
+					}
+				case both:
+					if (attack_r.nextDouble()>atteckerProb){
+						((DtsnMessage)m).flipPiggayBagBit();
+					//	System.out.println("TURNING ON/OFF");
+
+					}
+				case none:
+			}
+
 			count[1]++;
 			super.addToMessages(m, newMessage);
 		}

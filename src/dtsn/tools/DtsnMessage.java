@@ -15,6 +15,8 @@ import dtsn.Exception.ScenarioUndefined;
 public class DtsnMessage extends Message implements Serializable ,Comparator<DtsnMessage> {
 	
 	private static final long serialVersionUID = 1L;
+	protected 	static final int EAR_FLAG=3;
+
 	protected int piggayBagBit;
 	protected int SeqNum;
 	protected int sessionId;
@@ -67,7 +69,6 @@ public class DtsnMessage extends Message implements Serializable ,Comparator<Dts
 		this.initTtl = m.initTtl;
 		this.appID = m.appID;
 		appID=m.appID;
-
 		piggayBagBit=m.piggayBagBit;
 
 		SeqNum=m.SeqNum;
@@ -118,9 +119,27 @@ public class DtsnMessage extends Message implements Serializable ,Comparator<Dts
 		return piggayBagBit;
 	}
 
-	public void setPiggayBagBit(int piggayBagBit) {
-		this.piggayBagBit = piggayBagBit;
+	public boolean IsPiggayBagBit() {
+		return piggayBagBit==EAR_FLAG;
+	}
+	public void flipPiggayBagBit(){
+		if (IsPiggayBagBit()){
+			unsetPiggayBagBit();
+		}
+		else{
+			setPiggayBagBit();
+		}
+	}
+
+	public void setPiggayBagBit() {
+		this.piggayBagBit = EAR_FLAG;
 		addProperty("piggayBagBit",piggayBagBit);
+
+	}
+
+	public void unsetPiggayBagBit() {
+		this.piggayBagBit = 0;
+		addProperty("piggayBagBit",0);
 
 	}
 

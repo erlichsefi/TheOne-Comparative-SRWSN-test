@@ -271,7 +271,7 @@ public class DtsnSource extends DtsnApplication {
 				sendToDest(tosend.get(i).replicateRTX(), host);
 			}
 			DtsnMessage last=(DtsnMessage) tosend.get(tosend.size()-1);
-			last.setPiggayBagBit(EAR_FLAG);
+			last.setPiggayBagBit();
 			sendToDest( last.replicateRTX(),host);
 		}
 		return OnAckReceived(Integer.parseInt(seqNumbers[0]),m,host);
@@ -357,7 +357,7 @@ public class DtsnSource extends DtsnApplication {
 		EarAttemptsCounter=1;
 		StartNewEARtimer(OutputBuffer.GetEarTime(),host);
 		//send ear
-		m.setPiggayBagBit(EAR_FLAG);
+		m.setPiggayBagBit();
 		sendToDestSetApp(m,host);
 	}
 
@@ -393,7 +393,7 @@ public class DtsnSource extends DtsnApplication {
 		DtsnMessage m=NewInstance(host,Desthost ,  "data"+"_"+host.getAddress()+"_"+sending_index2,sessionId,seqNum);
 		m.setNoramlData(DataBlockBuffer[seqNum-1]);
 		m.setDATA_BIT();
-		m.setPiggayBagBit(EAR_FLAG);;
+		m.setPiggayBagBit();;
 		m.setNextExpected(sending_index2);
 		seqNum++;
 		OutputBuffer.add(m);

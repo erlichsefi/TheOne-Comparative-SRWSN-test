@@ -31,7 +31,6 @@ import report.DtsnAppReporter;
  * @author teemuk
  */
 public abstract class DtsnApplication extends Application {
-	protected 	static final int EAR_FLAG=3;
 	protected 	TimerObject LastActivity=null;
 	protected 	long ActivtyTimerLength=Values.DTSN_LENGTH_OG_ACTIVITY_TIMRER;
 

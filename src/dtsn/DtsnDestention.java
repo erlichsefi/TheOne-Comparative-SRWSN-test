@@ -137,14 +137,13 @@ public class DtsnDestention extends DtsnApplication{
 			AWsetStatus=true;
 		}
 		if (m.IsDATA_BIT()){
-			//System.out.println("got: "+m.getId());
 			if (!ReceptionBuffer.IsDuplicate(m)){
 				ReceptionBuffer.add(m);
 				if (ReceptionBuffer.IsInSenquence(m)){
 					DeliverToHigerLevel();
 				}
 			}
-			if(m.getPiggayBagBit()==EAR_FLAG){
+			if(m.IsPiggayBagBit()){
 				OnEarDelivered(m.getSeqNum(),host);
 			}
 		}
@@ -154,6 +153,7 @@ public class DtsnDestention extends DtsnApplication{
 		return null;
 
 	}
+
 
 
 	private void DeliverToHigerLevel() {

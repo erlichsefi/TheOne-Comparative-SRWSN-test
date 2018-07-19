@@ -118,7 +118,7 @@ public class DtsnMiddle<T extends DtsnMessage> extends DtsnApplication {
 				sendToDest(last.replicateRTX(),host);
 			}
 			else{
-				last.setPiggayBagBit(EAR_FLAG);
+				last.setPiggayBagBit();
 				sendToDest( last.replicateRTX(),host);
 			}
 
